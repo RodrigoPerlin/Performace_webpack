@@ -1,9 +1,9 @@
 import React from "react";
 
-const pokemon = () => (
+const Pokemon = () => (
   <div>
     <p>pokemon</p>
   </div>
 );
 
-export default Cats;
+export default Pokemon;
