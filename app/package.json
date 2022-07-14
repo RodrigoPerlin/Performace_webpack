@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack serve --hot"
+    "serve": "serve dist -p 3001",
+    "clean": "rm -rf dist",
+    "dev": "webpack serve",
+    "start": "webpack-cli serve"
   },
   "keywords": [],
   "author": "",

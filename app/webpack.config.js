@@ -28,7 +28,7 @@ module.exports={
       },
       devServer: {
         compress: true,
-        port: 9001, // default 8000
+        port: 9001,
         historyApiFallback: true,
         hot: true,
       },
@@ -66,8 +66,13 @@ module.exports={
         new HtmlWebpackPlugin({
           template: "./public/index.html",
         }),
+        new ModuleFederationPlugin({
+          name: 'app',
+          remotes: {
+            app2: `app2@//localhost:3002/remoteEntry.js`,
+          }
+        }),
           new webpack.optimize.ModuleConcatenationPlugin(),
           new BundleAnalyzerPlugin(),
               ],    
-
 }
