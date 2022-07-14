@@ -2,7 +2,9 @@ import React from "react";
 
 const Pokemon = () => (
   <div>
-    <p>pokemon</p>
+    <h1>Page Pokemon</h1>
+    &#128522;
+    <p>app2</p>
   </div>
 );
 

@@ -6,9 +6,9 @@ const Pokemon = lazy(() => import("app2/Pokemon"));
 
 const Routers = () => (
   <Router>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Carregando...</div>}>
       <Routes>
-        <Route path="/cats" element={<Cats />} />
+        <Route path="/" element={<Cats />} />
         <Route path="/pokemon" element={<Pokemon />} />
       </Routes>
     </Suspense>
