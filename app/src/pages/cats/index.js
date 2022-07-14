@@ -23,10 +23,10 @@ const Cats = () => {
   console.log(inView, "inView");
   return (
     <div>
-      <p> Webpack 5</p>
       <div>
         <Contener>
           <Card>
+            <h1>lazy e observer</h1>
             <Img
               loading="lazy"
               src="https://placekitten.com/400/400"
@@ -34,7 +34,6 @@ const Cats = () => {
             ></Img>
           </Card>
           <br></br>
-
           <br></br>
           <br></br>
           <br></br>
@@ -45,121 +44,20 @@ const Cats = () => {
           <br></br>
           <br></br>
           <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <div ref={ref}>ASDASDASDSD</div>
-
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+          <div ref={ref}>Chegou</div>
+          {inView && (
+            <Card>
+              <h1>Renderizado componete pelo inView</h1>
+              <p>&#128522;</p>
+              <p>&#128523;</p>
+              <p>&#128524;</p>
+              <p>&#128526;</p>
+              <p>&#128525;</p>
+              <p>&#128527;</p>
+              <p>&#128528;</p>
+              <p>&#128529;</p>
+            </Card>
+          )}
         </Contener>
       </div>
     </div>
