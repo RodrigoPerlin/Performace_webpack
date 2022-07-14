@@ -1,14 +1,23 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const webpack = require("webpack");
+const ModuleFederationPlugin =
+  require("webpack").container.ModuleFederationPlugin;
+const deps = require("./package.json").dependencies;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const webpack = require("webpack");
 
 module.exports = {
+  entry: "./src/index.js",
   mode: "development",
-  entry: {
-    main: path.resolve(__dirname, "./src/index.js"),
+  devServer: {
+    compress: true,
+    historyApiFallback: true,
+    hot: true,
+    port: 3001,
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
   },
   optimization: {
     splitChunks: {
@@ -16,34 +25,25 @@ module.exports = {
         vendor: {
           chunks: "initial",
           test: path.resolve(__dirname, "node_modules"),
-          name: "commons",
+          name: "vendor.bundle.js",
           enforce: true,
         },
       },
     },
   },
   output: {
-    //filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "./dist"),
-    filename: "bundle.js",
+    filename: "[name].[contenthash].bundle.js",
+    publicPath: "auto",
   },
-  devServer: {
-    compress: true,
-    port: 9001,
-    historyApiFallback: true,
-    hot: true,
-  },
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
-
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
+        test: /\.jsx?$/,
         loader: "babel-loader",
-        options: { presets: ["@babel/env", "@babel/preset-react"] },
+        exclude: /node_modules/,
+        options: {
+          presets: ["@babel/preset-react"],
+        },
       },
       {
         test: /\.css$/,
@@ -59,20 +59,31 @@ module.exports = {
       },
     ],
   },
-  performance: {
-    hints: false,
-  },
   plugins: [
+    new ModuleFederationPlugin({
+      name: "app1",
+      filename: "remoteEntry.js",
+      remotes: {
+        app2: "app2@http://localhost:3002/remoteEntry.js",
+      },
+      shared: {
+        ...deps,
+        react: {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
-    new ModuleFederationPlugin({
-      name: "app",
-      remotes: {
-        app2: `app2@//localhost:3002/remoteEntry.js`,
-      },
-    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
 };
