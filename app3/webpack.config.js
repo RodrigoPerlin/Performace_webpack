@@ -57,10 +57,10 @@ module.exports = (env = {}) => ({
     }),
     new ModuleFederationPlugin({
       name: "app3",
-      library: { type: "var", name: "app2" },
+      library: { type: "var", name: "app3" },
       filename: "remoteEntry.js",
       exposes: {
-        "./welcome": "./src/app.js",
+        "./Main": "./src/components/layout",
       },
       shared: {
         ...deps,
